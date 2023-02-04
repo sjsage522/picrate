@@ -1,12 +1,11 @@
 package com.junseok.picrate.card;
 
+import com.junseok.picrate.image.Image;
+import com.junseok.picrate.model.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
-
-import com.junseok.picrate.image.Image;
-import com.junseok.picrate.model.BaseEntity;
 
 @Getter
 @Entity

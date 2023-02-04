@@ -4,6 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum ErrorCode {
+    FAILED_UPLOAD_IMAGE(400, "B001", "이미지 업로드를 실패했습니다."),
+
     TEST_CODE(400, "T001", "테스트 에러 코드");
 
     private final int status;
