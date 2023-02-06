@@ -1,5 +1,6 @@
 package com.junseok.picrate.common.exception;
 
+import com.junseok.picrate.common.dto.ApiResult;
 import com.junseok.picrate.common.exception.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ public class RestControllerExceptionHandler {
      * 애플리케이션 비즈니스 예외들
      */
     @ExceptionHandler(BusinessException.class)
-    protected ResponseEntity<ErrorResponse> handleBusinessException(
+    protected ResponseEntity<ApiResult<ErrorResponse>> handleBusinessException(
             final BusinessException ex) {
         final ErrorResponse response = ErrorResponse.of(ex.getMessage(), ex.getErrorCode());
 
@@ -24,7 +25,7 @@ public class RestControllerExceptionHandler {
         }
 
         return new ResponseEntity<>(
-            response,
+            ApiResult.failed(response),
             statusCode
         );
     }
@@ -33,11 +34,11 @@ public class RestControllerExceptionHandler {
      * 서버 에러
      */
     @ExceptionHandler(Exception.class)
-    protected ResponseEntity<ErrorResponse> handleException(
+    protected ResponseEntity<ApiResult<ErrorResponse>> handleException(
             final Exception ex) {
         log.error("{}", ex.getMessage());
         return new ResponseEntity<>(
-                ErrorResponse.of(ex.getMessage(), "SERVER_ERROR", 400),
+                ApiResult.failed(ErrorResponse.of(ex.getMessage(), "SERVER_ERROR", 400)),
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -55,23 +56,23 @@ public class CardServiceImpl implements CardService {
 
         // Ratings DB insert
         List<Rating> ratingList = new ArrayList<>();
-        List<RatingResponse> ratingResponseList = new ArrayList<>();
         fields.stream().map(ratingInfo -> Rating.builder()
                 .card(savedCard)
                 .label(ratingInfo.getLabel())
                 .x(ratingInfo.getX())
                 .y(ratingInfo.getY())
-                .build()).forEachOrdered(newRating -> {
-                    ratingList.add(newRating);
-                    ratingResponseList.add(new RatingResponse(newRating));
-                });
-        ratingRepository.saveAll(ratingList);
+                .build()).forEachOrdered(ratingList::add);
+        List<Rating> savedRatings = ratingRepository.saveAll(ratingList);
+        List<RatingResponse> ratingResponseList = savedRatings.stream().map(RatingResponse::new)
+                .collect(Collectors.toList());
 
 
         return CardResponse.builder()
                 .id(newCard.getId())
                 .imageResponse(new ImageResponse(savedImage))
                 .ratingResponses(ratingResponseList)
+                .createdAt(savedCard.getCreatedAt())
+                .modifiedAt(savedCard.getModifiedAt())
                 .build();
     }
 }

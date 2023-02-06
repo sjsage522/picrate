@@ -2,12 +2,14 @@ package com.junseok.picrate.rating.vo;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Setter
 @Getter
 @ToString
+@NoArgsConstructor
 public class RatingInfo {
     private Integer rate;
 
