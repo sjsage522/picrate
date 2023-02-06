@@ -9,4 +9,6 @@ import java.util.List;
 public interface CardService {
 
     CardResponse uploadCard(MultipartFile image, List<RatingInfo> fields);
+
+    CardResponse getCard(Long id);
 }

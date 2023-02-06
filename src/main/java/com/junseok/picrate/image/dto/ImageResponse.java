@@ -25,13 +25,17 @@ public class ImageResponse {
     @JsonProperty(value = "size")
     private Long size;
 
+    @JsonProperty(value = "url")
+    private String url;
+
     @Builder
-    private ImageResponse(Long id, String orgName, String hashName, String type, Long size) {
+    private ImageResponse(Long id, String orgName, String hashName, String type, Long size, String url) {
         this.id = id;
         this.orgName = orgName;
         this.hashName = hashName;
         this.type = type;
         this.size = size;
+        this.url = url;
     }
 
     public ImageResponse(Image image) {

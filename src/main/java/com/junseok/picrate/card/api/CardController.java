@@ -10,6 +10,8 @@ import com.junseok.picrate.rating.vo.RatingInfo;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,18 +30,33 @@ public class CardController {
     }
 
     /**
-     * 평가 저장
+     * 평가(카드) 저장
      * @param image  image
      * @param fields ratings
-     * @return CardResponse DTO
+     * @return cardId
      * @throws JsonProcessingException json parsing error
      */
     @PostMapping("/card")
-    public ResponseEntity<ApiResult<CardResponse>> uploadCard(@RequestParam("image") MultipartFile image, @RequestParam("fields") String fields) throws JsonProcessingException {
+    public ResponseEntity<ApiResult<Long>> uploadCard(@RequestParam("image") MultipartFile image, @RequestParam("fields") String fields) throws JsonProcessingException {
         List<RatingInfo> ratings = new ObjectMapper().readValue(fields, new TypeReference<>() {});
 
         CardResponse cardResponse = cardService.uploadCard(image, ratings);
         
+        return new ResponseEntity<>(
+            ApiResult.succeed(cardResponse.getId()),
+            HttpStatus.CREATED
+        );
+    }
+
+    /**
+     * 평가(카드) 조회
+     * @param cardId id
+     * @return CardResponse DTO
+     */
+    @GetMapping("/card/{cardId}")
+    public ResponseEntity<ApiResult<CardResponse>> getCard(@PathVariable Long cardId) {
+        CardResponse cardResponse = cardService.getCard(cardId);
+
         return new ResponseEntity<>(
             ApiResult.succeed(cardResponse),
             HttpStatus.CREATED

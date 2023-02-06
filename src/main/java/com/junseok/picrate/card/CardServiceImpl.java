@@ -62,17 +62,30 @@ public class CardServiceImpl implements CardService {
                 .x(ratingInfo.getX())
                 .y(ratingInfo.getY())
                 .build()).forEachOrdered(ratingList::add);
-        List<Rating> savedRatings = ratingRepository.saveAll(ratingList);
-        List<RatingResponse> ratingResponseList = savedRatings.stream().map(RatingResponse::new)
-                .collect(Collectors.toList());
+        ratingRepository.saveAll(ratingList);
 
 
         return CardResponse.builder()
                 .id(newCard.getId())
-                .imageResponse(new ImageResponse(savedImage))
-                .ratingResponses(ratingResponseList)
-                .createdAt(savedCard.getCreatedAt())
-                .modifiedAt(savedCard.getModifiedAt())
+                .build();
+    }
+
+    //TODO
+    @Override
+    public CardResponse getCard(Long id) {
+
+        Card findCard = cardRepository.getReferenceById(id);
+        List<Rating> findRaings = ratingRepository.findAllByCardId(id);
+
+        Image findImage = findCard.getImage();
+        ImageResponse imageResponse = new ImageResponse(findImage);
+        imageResponse.setUrl(null);
+
+
+        return CardResponse.builder()
+                .id(id)
+                .imageResponse(imageResponse)
+                .ratingResponses(null)
                 .build();
     }
 }
