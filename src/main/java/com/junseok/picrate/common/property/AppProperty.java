@@ -12,4 +12,5 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 public class AppProperty {
 
     private final String environment;
+    private final String fileStorePath;
 }

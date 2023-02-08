@@ -59,7 +59,7 @@ public class CardController {
 
         return new ResponseEntity<>(
             ApiResult.succeed(cardResponse),
-            HttpStatus.CREATED
+            HttpStatus.OK
         );
     }
 }

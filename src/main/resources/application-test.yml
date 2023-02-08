@@ -17,3 +17,4 @@ spring:
 
 app:
   environment: test
+  file-store-path: /Users/Shared/data/files/picrate

@@ -23,12 +23,6 @@ public class FileUploadLocalUtils implements FileUploadUtils {
 
     @Override
     public Optional<String> uploadFile(MultipartFile file, String dirPath) {
-        String appEnv = appProperty.getEnvironment();
-        if (!"prod".equals(appEnv)) {
-            String homeDir = System.getProperty("user.home");
-            dirPath = homeDir + "/picrate/tmp/data";
-        }
-
         try {
             final String hashName = hashingFileName(new String(file.getBytes())).orElseThrow(NoSuchAlgorithmException::new);
             String fileDirPath = dirPath + "/" + hashName.substring(0, 2);
@@ -61,6 +55,6 @@ public class FileUploadLocalUtils implements FileUploadUtils {
 
     @Override
     public Optional<String> uploadFile(MultipartFile file) {
-        return this.uploadFile(file, "/data/files/picrate");
+        return this.uploadFile(file, appProperty.getFileStorePath());
     }
 }

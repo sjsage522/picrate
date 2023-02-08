@@ -70,7 +70,6 @@ public class CardServiceImpl implements CardService {
                 .build();
     }
 
-    //TODO
     @Override
     public CardResponse getCard(Long id) {
 
@@ -79,8 +78,8 @@ public class CardServiceImpl implements CardService {
 
         Image findImage = findCard.getImage();
         ImageResponse imageResponse = new ImageResponse(findImage);
+        String hashName = imageResponse.getHashName();
         imageResponse.setUrl(null);
-
 
         return CardResponse.builder()
                 .id(id)
