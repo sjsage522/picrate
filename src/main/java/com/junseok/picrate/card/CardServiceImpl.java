@@ -13,10 +13,10 @@ import com.junseok.picrate.rating.vo.RatingInfo;
 import com.junseok.picrate.util.FileUploadUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -32,6 +32,7 @@ public class CardServiceImpl implements CardService {
         this.ratingRepository = ratingRepository;
     }
 
+    @Transactional
     @Override
     public CardResponse uploadCard(MultipartFile image, List<RatingInfo> fields) {
         final String hashFileName = fileUploadUtils.uploadFile(image).orElseThrow(
@@ -70,21 +71,24 @@ public class CardServiceImpl implements CardService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public CardResponse getCard(Long id) {
 
         Card findCard = cardRepository.getReferenceById(id);
-        List<Rating> findRaings = ratingRepository.findAllByCardId(id);
 
         Image findImage = findCard.getImage();
         ImageResponse imageResponse = new ImageResponse(findImage);
-        String hashName = imageResponse.getHashName();
-        imageResponse.setUrl(null);
+
+        List<Rating> findRaings = findCard.getRatings();
+        List<RatingResponse> ratingResponses = findRaings.stream().map(RatingResponse::new).toList();
 
         return CardResponse.builder()
                 .id(id)
                 .imageResponse(imageResponse)
-                .ratingResponses(null)
+                .ratingResponses(ratingResponses)
+                .createdAt(findCard.getCreatedAt())
+                .modifiedAt(findCard.getModifiedAt())
                 .build();
     }
 }
