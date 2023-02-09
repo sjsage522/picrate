@@ -11,6 +11,8 @@ import com.junseok.picrate.rating.RatingRepository;
 import com.junseok.picrate.rating.dto.RatingResponse;
 import com.junseok.picrate.rating.vo.RatingInfo;
 import com.junseok.picrate.util.FileUploadUtils;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +27,7 @@ public class CardServiceImpl implements CardService {
     private final ImageRepository imageRepository;
     private final RatingRepository ratingRepository;
 
-    public CardServiceImpl(FileUploadUtils fileUploadUtils, CardRepository cardRepository, ImageRepository imageRepository, RatingRepository ratingRepository) {
+    public CardServiceImpl(@Qualifier("fileUploadLocalUtils") FileUploadUtils fileUploadUtils, CardRepository cardRepository, ImageRepository imageRepository, RatingRepository ratingRepository) {
         this.fileUploadUtils = fileUploadUtils;
         this.cardRepository = cardRepository;
         this.imageRepository = imageRepository;

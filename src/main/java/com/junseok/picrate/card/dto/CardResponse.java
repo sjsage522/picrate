@@ -6,10 +6,12 @@ import com.junseok.picrate.image.dto.ImageResponse;
 import com.junseok.picrate.rating.dto.RatingResponse;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 public class CardResponse extends BaseTimeDto {
     private Long id;
