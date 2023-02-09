@@ -28,13 +28,16 @@ public class Rating extends BaseEntity {
 
     private String label;
 
+    private String name;
+
     @Builder
-    private Rating(Card card, Double x, Double y, Integer rate, String label) {
+    private Rating(Card card, Double x, Double y, Integer rate, String label, String name) {
         this.card = card;
         this.x = x;
         this.y = y;
         this.rate = rate;
         this.label = label;
+        this.name = name;
     }
 
     protected Rating() {
