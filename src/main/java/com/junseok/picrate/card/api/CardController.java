@@ -37,13 +37,17 @@ public class CardController {
      * @throws JsonProcessingException json parsing error
      */
     @PostMapping("/card")
-    public ResponseEntity<ApiResult<Long>> uploadCard(@RequestParam("image") MultipartFile image, @RequestParam("fields") String fields) throws JsonProcessingException {
+    public ResponseEntity<ApiResult<CardResponse>> uploadCard(@RequestParam("image") MultipartFile image, @RequestParam("fields") String fields) throws JsonProcessingException {
         List<RatingInfo> ratings = new ObjectMapper().readValue(fields, new TypeReference<>() {});
 
         CardResponse cardResponse = cardService.uploadCard(image, ratings);
         
         return new ResponseEntity<>(
-            ApiResult.succeed(cardResponse.getId()),
+            ApiResult.succeed(
+                CardResponse.builder()
+                .id(cardResponse.getId())
+                .build()
+            ),
             HttpStatus.CREATED
         );
     }

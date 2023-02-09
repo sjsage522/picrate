@@ -1,5 +1,6 @@
 package com.junseok.picrate.card.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.junseok.picrate.common.dto.BaseTimeDto;
 import com.junseok.picrate.image.dto.ImageResponse;
@@ -11,6 +12,7 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class CardResponse extends BaseTimeDto {
