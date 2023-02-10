@@ -4,10 +4,12 @@ import com.junseok.picrate.card.Card;
 import com.junseok.picrate.model.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Getter
+@ToString
 @Entity
 @Table(name = "rating")
 public class Rating extends BaseEntity {
@@ -28,19 +30,27 @@ public class Rating extends BaseEntity {
 
     private String label;
 
-    private String name;
+    private String rater;
 
     @Builder
-    private Rating(Card card, Double x, Double y, Integer rate, String label, String name) {
+    private Rating(Card card, Double x, Double y, Integer rate, String label, String rater) {
         this.card = card;
         this.x = x;
         this.y = y;
         this.rate = rate;
         this.label = label;
-        this.name = name;
+        this.rater = rater;
     }
 
     protected Rating() {
         /* empty */
+    }
+
+    public void updateRate(Integer rate) {
+        this.rate = rate;
+    }
+
+    public void setRater(String rater) {
+        this.rater = rater;
     }
 }

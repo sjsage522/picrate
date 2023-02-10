@@ -3,6 +3,7 @@ package com.junseok.picrate.card;
 import com.junseok.picrate.card.dto.CardResponse;
 import com.junseok.picrate.common.exception.ErrorCode;
 import com.junseok.picrate.common.exception.ImageUploadFailedException;
+import com.junseok.picrate.common.exception.NotFoundCardException;
 import com.junseok.picrate.image.Image;
 import com.junseok.picrate.image.ImageRepository;
 import com.junseok.picrate.image.dto.ImageResponse;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -58,13 +60,12 @@ public class CardServiceImpl implements CardService {
 
 
         // Ratings DB insert
-        List<Rating> ratingList = new ArrayList<>();
-        fields.stream().map(ratingInfo -> Rating.builder()
+        List<Rating> ratingList = fields.stream().map(ratingInfo -> Rating.builder()
                 .card(savedCard)
                 .label(ratingInfo.getLabel())
                 .x(ratingInfo.getX())
                 .y(ratingInfo.getY())
-                .build()).forEachOrdered(ratingList::add);
+                .build()).collect(Collectors.toList());
         ratingRepository.saveAll(ratingList);
 
 
@@ -76,8 +77,7 @@ public class CardServiceImpl implements CardService {
     @Transactional(readOnly = true)
     @Override
     public CardResponse getCard(Long id) {
-
-        Card findCard = cardRepository.getReferenceById(id);
+        Card findCard = cardRepository.findById(id).orElseThrow(() -> new NotFoundCardException(ErrorCode.NOT_FOUND_CARD));
 
         Image findImage = findCard.getImage();
         ImageResponse imageResponse = new ImageResponse(findImage);

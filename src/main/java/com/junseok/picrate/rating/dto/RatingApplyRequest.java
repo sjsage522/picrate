@@ -15,7 +15,8 @@ import lombok.ToString;
 @ToString
 public class RatingApplyRequest { 
     @NotBlank
-    private String name;
+    @JsonProperty(value = "name")
+    private String rater;
 
     @Valid @NotNull
     @JsonProperty(value = "fields")
@@ -24,17 +25,11 @@ public class RatingApplyRequest {
     @Getter
     @ToString
     public static class RatingApplyInfo {
-        @NotBlank
-        private Double x;
+        @NotNull
+        private Long id;
 
-        @NotBlank
-        private Double y;
-
-        @NotBlank
+        @NotNull
         private Integer rate;
-
-        @NotBlank
-        private String label;
 
         protected RatingApplyInfo() {}
     }
