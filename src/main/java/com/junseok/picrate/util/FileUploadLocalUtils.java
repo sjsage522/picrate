@@ -25,7 +25,7 @@ public class FileUploadLocalUtils implements FileUploadUtils {
     private final AppProperty appProperty;
 
     private final List<String> allowExtensions = List.of(
-        "image/jpeg", "image/png", "image/jpeg"
+        "image/jpeg", "image/png", "image/jpg"
     );
 
     @Override

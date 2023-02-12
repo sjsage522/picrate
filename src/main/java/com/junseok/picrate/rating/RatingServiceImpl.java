@@ -1,9 +1,6 @@
 package com.junseok.picrate.rating;
 
-import com.junseok.picrate.card.Card;
-import com.junseok.picrate.card.CardRepository;
 import com.junseok.picrate.common.exception.ErrorCode;
-import com.junseok.picrate.common.exception.NotFoundCardException;
 import com.junseok.picrate.common.exception.NotFoundRatingException;
 import com.junseok.picrate.rating.dto.RatingResponse;
 import com.junseok.picrate.rating.dto.RatingApplyRequest.RatingApplyInfo;
