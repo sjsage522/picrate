@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Gradle Command Execute function
 function gradle_exec()
 {
@@ -30,7 +32,7 @@ gradle_exec "test"
 echo "> Gradle Build.."
 gradle_exec "build"
 
-CURRENT_PID=$(lsof -i :8080 | awk 'NR>1 {print $2}')
+CURRENT_PID=$(lsof -i :8082 | awk 'NR>1 {print $2}')
 
 echo "Application Running On [$CURRENT_PID] Port."
 
@@ -48,4 +50,4 @@ echo "> JAR Name: $JAR_NAME"
 
 nohup java -jar \
        -Dspring.profiles.active=prod \
-       $BUILD_FILE_PATH > /var/log/nohup.out 2>&1 &
+       $JAR_NAME > /var/log/nohup.out 2>&1 &
