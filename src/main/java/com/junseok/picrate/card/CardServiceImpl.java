@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -82,7 +83,9 @@ public class CardServiceImpl implements CardService {
         ImageResponse imageResponse = new ImageResponse(findImage);
 
         List<Rating> findRaings = findCard.getRatings();
-        List<RatingResponse> ratingResponses = findRaings.stream().map(RatingResponse::new).toList();
+        List<RatingResponse> ratingResponses = findRaings.stream()
+                .map(RatingResponse::new)
+                .collect(Collectors.toList());
 
         return CardResponse.builder()
                 .id(id)
