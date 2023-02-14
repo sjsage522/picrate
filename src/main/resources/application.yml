@@ -1,4 +1,11 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+      
 spring:
   profiles:
     default: dev
-
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: "/static/**"

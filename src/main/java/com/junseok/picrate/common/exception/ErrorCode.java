@@ -10,6 +10,7 @@ public enum ErrorCode {
     NOT_FOUND_CARD(400, "B004", "존재하지 않는 작성카드 입니다."),
     NOT_FOUND_RATING(400, "B005", "존재하지 않는 평가 입니다."),
 
+    NOT_FOUND(404, "C001", "요청 리소스를 찾을 수 없습니다."),
     TEST_CODE(400, "T001", "테스트 에러 코드");
 
     private final int status;

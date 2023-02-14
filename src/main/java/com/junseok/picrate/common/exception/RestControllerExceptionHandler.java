@@ -7,10 +7,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 @Slf4j
 @RestControllerAdvice
 public class RestControllerExceptionHandler {
+    /**
+     * 404 NOT FOUND
+     */
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<ApiResult<ErrorResponse>> handleNoHandlerFoundException(NoHandlerFoundException ex) {
+        final ErrorResponse response = ErrorResponse.from(ErrorCode.NOT_FOUND);
+
+        return new ResponseEntity<>(
+            ApiResult.failed(response),
+            HttpStatus.NOT_FOUND
+        );
+    }
+
     /**
      * 애플리케이션 비즈니스 예외들
      */

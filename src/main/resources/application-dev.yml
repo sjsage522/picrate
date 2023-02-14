@@ -18,6 +18,9 @@ spring:
   sql:
     init:
       mode: always
+  config:
+    import:
+    - classpath:application.yml
 
 app:
   environment: dev
