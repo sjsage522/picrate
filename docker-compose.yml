@@ -35,7 +35,24 @@ services:
     volumes:
       - /var/lib/mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: ${MYSQL_ROOT_HOST}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      TZ: Asia/Seoul
     ports:
       - "3306:3306"
+    command:
+      - '--character-set-server=utf8mb4'
+      - '--collation-server=utf8mb4_unicode_ci'
+  
+  db-adminer:
+    container_name: db-adminer
+    image: adminer:latest
+    ports:
+      - "9000:9000"
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DESIGN=hydra
+      - ADMINER_PLUGINS=tables-filter tinymce
+    
     
