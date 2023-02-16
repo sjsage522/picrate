@@ -251,3 +251,4 @@ statistics: 통계치
 # Custom
 application-prod.yml
 **/resources/devdata/**
+.env

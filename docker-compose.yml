@@ -22,9 +22,20 @@ services:
     container_name: picrate-proxy
     image: sjsage522/picrate-proxy
     ports:
-      - 80:80
+      - "80:80"
     volumes:
       - /var/log/nginx:/var/log/nginx
     depends_on:
       - app1
       - app2
+
+  db:
+    images: mysql:8.0
+    restart: always
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    
