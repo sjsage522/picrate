@@ -30,7 +30,7 @@ services:
       - app2
 
   db:
-    images: mysql:8.0
+    image: mysql:8.0
     restart: always
     volumes:
       - /var/lib/mysql:/var/lib/mysql
