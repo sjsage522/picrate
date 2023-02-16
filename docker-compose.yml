@@ -1,22 +1,36 @@
 version: '3'
 services:
   app1:
+    restart: always
     container_name: picrate-api-1
     image: sjsage522/picrate-api
     expose:
       - "8082"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
     volumes:
-      - /data/files/*:/data/files/*
-      - /var/log/nohup.out:/var/log/nohup.out
-  
+      - /data/files:/data/files
+      - /var/log:/var/log
+    depends_on:
+      - db
+
   app2:
+    restart: always
     container_name: picrate-api-2
     image: sjsage522/picrate-api
     expose:
       - "8082"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
     volumes:
-      - /data/files/*:/data/files/*
-      - /var/log/nohup.out:/var/log/nohup.out
+      - /data/files:/data/files
+      - /var/log:/var/log
+    depends_on:
+      - db
 
   nginx:
     container_name: picrate-proxy
@@ -35,6 +49,7 @@ services:
     volumes:
       - /var/lib/mysql:/var/lib/mysql
     environment:
+      MYSQL_USER: ${MYSQL_USER}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_ROOT_HOST: ${MYSQL_ROOT_HOST}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -44,7 +59,7 @@ services:
     command:
       - '--character-set-server=utf8mb4'
       - '--collation-server=utf8mb4_unicode_ci'
-  
+
   db-adminer:
     container_name: db-adminer
     image: adminer:latest
@@ -54,5 +69,3 @@ services:
       - ADMINER_DEFAULT_SERVER=db
       - ADMINER_DESIGN=hydra
       - ADMINER_PLUGINS=tables-filter tinymce
-    
-    
