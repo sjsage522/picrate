@@ -45,7 +45,7 @@ jobs:
         username: root
         key: ${{ secrets.PRIVATE_KEY }}
         # DEPLOY APPLICATION
-        script:
+        script: |
           cd ${{ secrets.PROJECT_PATH }}
           git checkout main && git pull
           docker-compose stop && docker-compose up -d
