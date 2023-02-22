@@ -1,1 +1,48 @@
+name: Java CI with Gradle
 
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+
+    - name: make application-prod.yml
+      run: |
+        cd ./src/main/resources
+        touch ./application-prod.yml
+
+        echo "${{ secrets.APPLICATION_PROD }}" >> ./application-prod.yml
+      shell: bash
+
+    - name: Build with Gradle
+      run: ./gradlew bootJar
+    
+    - name: Docker Image Build and Push
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERID }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build -f Dockerfile -t ${{ secrets.DOCKER_REPOSITORY }}/picrate-api .
+        docker push ${{ secrets.DOCKER_REPOSITORY }}/picrate-api .
+    
+    - name: Remote ssh connection
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: master
+        key: ${{ secrets.PRIVATE_KEY }}
+        script:
+          docker-compose stop && docker-compose up -d
