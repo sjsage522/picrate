@@ -2,9 +2,7 @@ FROM openjdk:11
 
 WORKDIR /
 
-RUN mkdir -p /var/log && touch /var/log/nohup.out
-
-COPY /var/log/nohup.out /var/log/nohup.out
+RUN touch /var/log/nohup.out
 
 ARG JAR_FILE_PATH=./build/libs/*SNAPSHOT.jar
 
