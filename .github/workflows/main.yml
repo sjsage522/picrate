@@ -36,7 +36,7 @@ jobs:
       run: |
         docker login -u ${{ secrets.DOCKER_USERID }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -f Dockerfile -t ${{ secrets.DOCKER_REPOSITORY }}/picrate-api .
-        docker push ${{ secrets.DOCKER_REPOSITORY }}/picrate-api .
+        docker push ${{ secrets.DOCKER_REPOSITORY }}/picrate-api/latest .
     
     - name: Remote ssh connection
       uses: appleboy/ssh-action@master
