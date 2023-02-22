@@ -61,7 +61,6 @@ public class FileUploadLocalUtils implements FileUploadUtils {
             final String hashName = hashingFileName(new String(file.getBytes())).orElseThrow(NoSuchAlgorithmException::new);
             String fileDirPath = this.getFileDirPath(hashName, dirPath);
             String fileFullPath = this.getFileFullPath(hashName, dirPath);
-            System.out.println(fileFullPath);
             File dir = new File(fileDirPath);
             File uploadFile = new File(fileFullPath);
 
