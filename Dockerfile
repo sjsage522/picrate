@@ -1,10 +1,10 @@
 FROM openjdk:11
 
+WORKDIR /
+
 RUN mkdir -p /var/log && touch /var/log/nohup.out
 
 ARG JAR_FILE_PATH=./build/libs/*SNAPSHOT.jar
-
-WORKDIR /app
 
 COPY ${JAR_FILE_PATH} /app.jar
 
