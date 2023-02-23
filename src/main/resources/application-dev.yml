@@ -25,3 +25,6 @@ spring:
 app:
   environment: dev
   file-store-path: /Users/Shared/data/files/picrate
+
+
+base-log-path: /Users/Shared/log

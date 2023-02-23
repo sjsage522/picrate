@@ -21,3 +21,5 @@ spring:
 app:
   environment: test
   file-store-path: ./src/main/resources/test
+
+base-log-path: ./src/main/resources/log
