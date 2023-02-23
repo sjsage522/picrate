@@ -12,7 +12,6 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
     volumes:
       - /data/files:/data/files
-      - /var/log/nohup.out:/var/log/nohup.out
     depends_on:
       - db
 
@@ -28,7 +27,6 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
     volumes:
       - /data/files:/data/files
-      - /var/log/nohup.out:/var/log/nohup.out
     depends_on:
       - db
 

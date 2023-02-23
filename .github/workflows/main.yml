@@ -48,4 +48,6 @@ jobs:
         script: |
           cd ${{ secrets.PROJECT_PATH }}
           git checkout main && git pull
-          docker-compose stop && docker-compose up -d
+          docker-compose stop && docker rm -f $(docker ps -qa)
+          docker pull ${{ secrets.DOCKER_REPOSITORY }}/picrate-api:latest
+          docker-compose up -d
