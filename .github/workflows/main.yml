@@ -30,7 +30,7 @@ jobs:
       shell: bash
 
     - name: Build with Gradle
-      run: ./gradlew build --stacktrace
+      run: ./gradlew build --info
     
     - name: Docker Image Build and Push
       run: |
