@@ -83,6 +83,7 @@ public class FileUploadLocalUtils implements FileUploadUtils {
 
             return Optional.of(hashName);
         } catch (NoSuchAlgorithmException | IOException e) {
+            log.error("{}", e.getMessage());
             return Optional.empty();
         }
     }
