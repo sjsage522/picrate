@@ -2,6 +2,9 @@ server:
   error:
     whitelabel:
       enabled: false
+  tomcat:
+    max-http-form-post-size: 500000000
+    max-swallow-size: 500000000
       
 spring:
   profiles:
