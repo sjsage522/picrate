@@ -39,7 +39,7 @@ services:
       - "80:80"
     volumes:
       - /var/log/nginx:/var/log/nginx
-      - /usr/share/nginx/html
+      - /usr/share/nginx/html:/usr/share/nginx/html
     depends_on:
       - app1
       - app2
