@@ -21,6 +21,7 @@ spring:
 logging:
   file:
     name: ${base-log-path}/app-api.log
-    max-history: 30
-    max-size: 100MB
-  # level:
+  logback:
+    rolling policy:
+      max-history: 30
+      max-file-size: 100MB
