@@ -37,6 +37,7 @@ services:
     image: sjsage522/picrate-proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /var/log/nginx:/var/log/nginx
       - /usr/share/nginx/html:/usr/share/nginx/html
