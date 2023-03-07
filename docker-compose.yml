@@ -40,6 +40,7 @@ services:
     volumes:
       - /var/log/nginx:/var/log/nginx
       - /usr/share/nginx/html:/usr/share/nginx/html
+      - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - app1
       - app2
