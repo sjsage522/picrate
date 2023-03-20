@@ -19,8 +19,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Transactional(readOnly = true)
-    public ImageResource getImageResource(String hashName) {
-        Image findImage = imageRepository.findByHashName(hashName).orElseThrow(() -> new NotFoundImageException(ErrorCode.NOT_FOUND_IMAGE));
+    public ImageResource getImageResource(Long id) {
+        Image findImage = imageRepository.findById(id).orElseThrow(() -> new NotFoundImageException(ErrorCode.NOT_FOUND_IMAGE));
 
         byte[] imageBytes = fileUploadUtils.getFileBytes(findImage.getHashName());
         String mimeType = fileUploadUtils.getMimeType(imageBytes).orElseThrow(() -> new NotAllowedMimeTypeException(ErrorCode.NOT_ALLOWED_MIMETYPE));

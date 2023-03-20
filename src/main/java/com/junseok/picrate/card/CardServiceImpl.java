@@ -81,8 +81,8 @@ public class CardServiceImpl implements CardService {
         Image findImage = findCard.getImage();
         ImageResponse imageResponse = new ImageResponse(findImage);
 
-        List<Rating> findRaings = findCard.getRatings();
-        List<RatingResponse> ratingResponses = findRaings.stream()
+        List<Rating> findRatings = findCard.getRatings();
+        List<RatingResponse> ratingResponses = findRatings.stream()
                 .map(RatingResponse::new)
                 .collect(Collectors.toList());
 

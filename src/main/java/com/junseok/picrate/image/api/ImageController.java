@@ -20,9 +20,9 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @GetMapping("/image/{hash}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String hash) {
-        ImageResource imageResource = imageService.getImageResource(hash);
+    @GetMapping("/image/{imageId}")
+    public ResponseEntity<byte[]> getImage(@PathVariable Long imageId) {
+        ImageResource imageResource = imageService.getImageResource(imageId);
 
         return ResponseEntity
             .ok()
