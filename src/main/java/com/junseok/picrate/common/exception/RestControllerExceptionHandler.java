@@ -53,7 +53,7 @@ public class RestControllerExceptionHandler {
         log.error("{}", ex.getMessage());
         return new ResponseEntity<>(
                 ApiResult.failed(ErrorResponse.of(ex.getMessage(), "SERVER_ERROR", 400)),
-                HttpStatus.INTERNAL_SERVER_ERROR
+                HttpStatus.BAD_REQUEST
         );
     }
 }
