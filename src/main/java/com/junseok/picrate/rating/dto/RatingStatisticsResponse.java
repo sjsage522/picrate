@@ -1,5 +1,7 @@
 package com.junseok.picrate.rating.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,13 +10,18 @@ import lombok.ToString;
 @Setter
 @ToString
 public class RatingStatisticsResponse {
-    private String rater;
-    private Double average;
-    private Long total;
+    @JsonProperty(value = "rating_id")
+    private Long ratingId;
 
-    public RatingStatisticsResponse(String rater, Double average, Long total) {
-        this.rater = rater;
-        this.average = average;
-        this.total = total;
+    @JsonProperty(value = "rating_average")
+    private Double ratingAverage;
+
+    @JsonProperty(value = "rating_sum")
+    private Long ratingSum;
+
+    public RatingStatisticsResponse(Long ratingId, Double ratingAverage, Long ratingSum) {
+        this.ratingId = ratingId;
+        this.ratingAverage = ratingAverage;
+        this.ratingSum = ratingSum;
     }
 }

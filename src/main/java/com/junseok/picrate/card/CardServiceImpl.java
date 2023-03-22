@@ -1,15 +1,16 @@
 package com.junseok.picrate.card;
 
 import com.junseok.picrate.card.dto.CardResponse;
+import com.junseok.picrate.card.entity.Card;
 import com.junseok.picrate.common.exception.ErrorCode;
 import com.junseok.picrate.common.exception.ImageUploadFailedException;
 import com.junseok.picrate.common.exception.NotFoundCardException;
-import com.junseok.picrate.image.Image;
 import com.junseok.picrate.image.ImageRepository;
 import com.junseok.picrate.image.dto.ImageResponse;
-import com.junseok.picrate.rating.Rating;
+import com.junseok.picrate.image.entity.Image;
 import com.junseok.picrate.rating.RatingRepository;
 import com.junseok.picrate.rating.dto.RatingResponse;
+import com.junseok.picrate.rating.entity.Rating;
 import com.junseok.picrate.rating.vo.RatingInfo;
 import com.junseok.picrate.util.FileUploadUtils;
 

@@ -1,4 +1,4 @@
-package com.junseok.picrate.image;
+package com.junseok.picrate.image.entity;
 
 import com.junseok.picrate.model.BaseEntity;
 import lombok.Builder;

@@ -1,7 +1,8 @@
 package com.junseok.picrate.image.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.junseok.picrate.image.Image;
+import com.junseok.picrate.image.entity.Image;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

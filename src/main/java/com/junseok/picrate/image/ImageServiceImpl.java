@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.junseok.picrate.common.exception.*;
 import com.junseok.picrate.image.dto.ImageResource;
+import com.junseok.picrate.image.entity.Image;
 import com.junseok.picrate.util.FileUploadUtils;
 
 @Service

@@ -1,8 +1,8 @@
-package com.junseok.picrate.card;
+package com.junseok.picrate.card.entity;
 
-import com.junseok.picrate.image.Image;
+import com.junseok.picrate.image.entity.Image;
 import com.junseok.picrate.model.BaseEntity;
-import com.junseok.picrate.rating.Rating;
+import com.junseok.picrate.rating.entity.Rating;
 
 import java.util.*;
 import lombok.Builder;

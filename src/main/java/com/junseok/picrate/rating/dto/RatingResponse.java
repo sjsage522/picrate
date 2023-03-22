@@ -1,7 +1,9 @@
 package com.junseok.picrate.rating.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.junseok.picrate.rating.Rating;
+import com.junseok.picrate.rating.entity.Rating;
+import com.junseok.picrate.rating.entity.RatingScore;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,8 +40,16 @@ public class RatingResponse {
         this.id = rating.getId();
         this.x = rating.getX();
         this.y = rating.getY();
-        this.rate = rating.getRate();
         this.label = rating.getLabel();
-        this.rater = rating.getRater();
+    }
+
+    public RatingResponse(RatingScore ratingScore) {
+        Rating rating = ratingScore.getRating();
+        this.id = ratingScore.getId();
+        this.x = rating.getX();
+        this.y = rating.getY();
+        this.label = rating.getLabel();
+        this.rate = ratingScore.getRate();
+        this.rater = ratingScore.getRater();
     }
 }
