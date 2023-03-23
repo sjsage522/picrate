@@ -16,7 +16,7 @@ import java.util.List;
 import com.junseok.picrate.common.dto.ApiResult;
 import com.junseok.picrate.rating.RatingService;
 import com.junseok.picrate.rating.dto.RatingApplyRequest;
-import com.junseok.picrate.rating.dto.RatingResponse;
+import com.junseok.picrate.rating.dto.RatingScoreResponse;
 import com.junseok.picrate.rating.dto.RatingStatisticsResponse;
 
 @RequestMapping("api/v1")
@@ -29,8 +29,8 @@ public class RatingController {
     }
 
     @PostMapping("/ratings/card/{cardId}")
-    public ResponseEntity<ApiResult<List<RatingResponse>>> applyRatings(@PathVariable Long cardId, @Valid @RequestBody RatingApplyRequest request) {
-        List<RatingResponse> ratingResponses = ratingService.applyRatings(cardId, request.getRater(), request.getRatingApplyInfos());
+    public ResponseEntity<ApiResult<List<RatingScoreResponse>>> applyRatings(@PathVariable Long cardId, @Valid @RequestBody RatingApplyRequest request) {
+        List<RatingScoreResponse> ratingResponses = ratingService.applyRatings(cardId, request.getRater(), request.getRatingApplyInfos());
         return new ResponseEntity<>(
             ApiResult.succeed(
                 ratingResponses

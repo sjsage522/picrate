@@ -102,6 +102,7 @@ public class RatingScoreRepositoryTest {
         // then
         Assertions.assertThat(ratingStatisticsResponses.size()).isEqualTo(1);
         Assertions.assertThat(ratingStatisticsResponses.get(0).getRatingId()).isEqualTo(1L);
+        Assertions.assertThat(ratingStatisticsResponses.get(0).getLabel()).isEqualTo("test label1");
         Assertions.assertThat(ratingStatisticsResponses.get(0).getRatingAverage()).isEqualTo(3.0);
         Assertions.assertThat(ratingStatisticsResponses.get(0).getRatingSum()).isEqualTo(6);
     }

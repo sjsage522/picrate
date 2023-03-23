@@ -1,8 +1,7 @@
 package com.junseok.picrate.rating.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.junseok.picrate.rating.entity.Rating;
-import com.junseok.picrate.rating.entity.RatingScore;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -19,20 +18,13 @@ public class RatingResponse {
 
     private Double y;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer rate;
-
     private String label;
 
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String rater;
-
     @Builder
-    private RatingResponse(Long id, Double x, Double y, Integer rate, String label) {
+    private RatingResponse(Long id, Double x, Double y, String label) {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.rate = rate;
         this.label = label;
     }
 
@@ -41,15 +33,5 @@ public class RatingResponse {
         this.x = rating.getX();
         this.y = rating.getY();
         this.label = rating.getLabel();
-    }
-
-    public RatingResponse(RatingScore ratingScore) {
-        Rating rating = ratingScore.getRating();
-        this.id = ratingScore.getId();
-        this.x = rating.getX();
-        this.y = rating.getY();
-        this.label = rating.getLabel();
-        this.rate = ratingScore.getRate();
-        this.rater = ratingScore.getRater();
     }
 }
