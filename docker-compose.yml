@@ -4,7 +4,7 @@ services:
     restart: always
     container_name: picrate-api-1
     image: sjsage522/picrate-api
-    expose:
+    ports:
       - "8082:8082"
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
@@ -20,7 +20,7 @@ services:
     restart: always
     container_name: picrate-api-2
     image: sjsage522/picrate-api
-    expose:
+    ports:
       - "8083:8083"
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
