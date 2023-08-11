@@ -5,7 +5,7 @@ services:
     container_name: picrate-api-1
     image: sjsage522/picrate-api
     expose:
-      - "8082"
+      - "8082:8082"
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
@@ -21,7 +21,7 @@ services:
     container_name: picrate-api-2
     image: sjsage522/picrate-api
     expose:
-      - "8082"
+      - "8083:8083"
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
@@ -32,19 +32,19 @@ services:
     depends_on:
       - db
 
-  nginx:
-    container_name: picrate-proxy
-    image: sjsage522/picrate-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/log/nginx:/var/log/nginx
-      - /usr/share/nginx/html:/usr/share/nginx/html
-      - /etc/letsencrypt:/etc/letsencrypt
-    depends_on:
-      - app1
-      - app2
+#  nginx:
+#    container_name: picrate-proxy
+#    image: sjsage522/picrate-proxy
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - /var/log/nginx:/var/log/nginx
+#      - /usr/share/nginx/html:/usr/share/nginx/html
+#      - /etc/letsencrypt:/etc/letsencrypt
+#    depends_on:
+#      - app1
+#      - app2
 
   db:
     image: mysql:8.0
