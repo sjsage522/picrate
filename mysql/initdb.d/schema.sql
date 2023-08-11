@@ -1,17 +1,3 @@
-CREATE TABLE IF NOT EXISTS `card`
-(
-    `id`          bigint NOT NULL AUTO_INCREMENT,
-    `created_at`  datetime(6) DEFAULT NULL,
-    `modified_at` datetime(6) DEFAULT NULL,
-    `image_id`    bigint NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `UK_image_id` (`image_id`),
-    CONSTRAINT `FK_image_id_card_id` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_unicode_ci;
-
-
 CREATE TABLE IF NOT EXISTS `image`
 (
     `id`          bigint NOT NULL AUTO_INCREMENT,
@@ -26,6 +12,18 @@ CREATE TABLE IF NOT EXISTS `image`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `card`
+(
+    `id`          bigint NOT NULL AUTO_INCREMENT,
+    `created_at`  datetime(6) DEFAULT NULL,
+    `modified_at` datetime(6) DEFAULT NULL,
+    `image_id`    bigint NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `UK_image_id` (`image_id`),
+    CONSTRAINT `FK_image_id_card_id` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `rating`
 (
